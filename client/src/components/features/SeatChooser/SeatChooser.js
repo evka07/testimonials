@@ -14,7 +14,6 @@ const SeatChooser = ({ chosenDay, chosenSeat, updateSeat }) => {
   const dispatch = useDispatch();
   const seats = useSelector(getSeats);
   const requests = useSelector(getRequests);
-
   const [socket, setSocket] = useState();
 
   useEffect(() => {
@@ -66,7 +65,7 @@ const SeatChooser = ({ chosenDay, chosenSeat, updateSeat }) => {
         </Button>
       );
   };
-
+  console.log('ILOSC MIEJSC', seats);
   const seatsAmount = 50;
   const freeSpaces =
     seatsAmount - seats.filter(seat => seat.day === chosenDay).length;
