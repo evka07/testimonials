@@ -4,6 +4,7 @@ const path = require('path');
 const socket = require('socket.io');
 const mongoose = require('mongoose');
 const app = express();
+const helmet = require('helmet');
 
 const testimonialsRoutes = require('./routes/testimonials.routes');
 const concertsRoutes = require('./routes/concerts.routes');
@@ -19,6 +20,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(helmet());
 app.use('/api', testimonialsRoutes);
 app.use('/api', concertsRoutes);
 app.use('/api', seatsRoutes);
@@ -31,11 +33,13 @@ app.use((req, res) => {
   res.status(404).send({ message: 'Not found...' });
 });
 
-mongoose.connect('mongodb+srv://admin:NewWaveFestival@cluster0.u77fukp.mongodb.net/?retryWrites=true&w=majority', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
+mongoose.connect(
+  'mongodb+srv://mrwilkd:SC1QMqLK622fhin3@cluster0.xu2ksze.mongodb.net/NewWaveDB?retryWrites=true&w=majority',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+);
 const db = mongoose.connection;
 
 app.use((req, res, next) => {
